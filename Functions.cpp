@@ -1,4 +1,12 @@
+/*
+** EPITECH PROJECT, 2024
+** Black-Hole-Calculator
+** File description:
+** Functions
+*/
+
 #include "Functions.hpp"
+#include <unistd.h>
 
 // gravitational constant
 #define G_value 6.674184
@@ -31,14 +39,12 @@ Functions::Functions() {}
 Functions::~Functions() {}
 
 void Functions::calculateMass() {
-    char input[100];
     double A = 0;
-    printw("\nEnter the area of the black hole in meters:\n");
-    refresh();
-    getstr(input);
-    sscanf(input, "%lf", &A);
+    printw("Enter the area of the black hole in meters:\n");
+    scanw("%lf", &A);
     double masse = sqrt((pow(c, 4) * A) / (16 * PI * G));
     printw("Mass of the black hole: %lf kg\n", masse);
+    getch();
     refresh();
 }
 
@@ -48,6 +54,8 @@ void Functions::calculateTemp() {
     scanw("%lf", &m);
     T = (1 / (8 * PI * K)) * ((h * pow(c, 3)) / (G * m));
     printw("The temperature of the black hole is %lfK\n", T);
+    getch();
+    refresh();
 }
 
 void Functions::calculateRadius() {
@@ -55,7 +63,9 @@ void Functions::calculateRadius() {
     printw("Enter the mass of the black hole in kilograms:\n");
     scanw("%lf", &masse);
     radius = (2 * G * masse) / pow(c, 2);
-    printw("Radius of the black hole in meters: %lf\n", radius);
+    printw("Radius of the black hole in meters: %lf m\n", radius);
+    getch();
+    refresh();
 }
 
 void Functions::calculateArea() {
@@ -63,7 +73,9 @@ void Functions::calculateArea() {
     printw("Enter the mass of the black hole in kilograms:\n");
     scanw("%lf", &masse);
     area = (16 * PI * pow(G, 2) * pow(masse, 2)) / pow(c, 4);
-    printw("Area of the black hole in meters: %lf\n", area);
+    printw("Area of the black hole in meters: %lf m\n", area);
+    getch();
+    refresh();
 }
 
 void Functions::calculateSurfaceGravity() {
@@ -71,7 +83,9 @@ void Functions::calculateSurfaceGravity() {
     printw("Enter the mass of the black hole in kilograms and the radius in meters:\n");
     scanw("%lf %lf", &m, &radius);
     k = (G * m) / pow(radius, 2);
-    printw("The Surface gravity of the black hole is %lf m/s²\n", k);
+    printw("The Surface gravity of the black hole is %lld m/s²\n", k);
+    getch();
+    refresh();
 }
 
 void Functions::calculateTime() {
@@ -79,7 +93,9 @@ void Functions::calculateTime() {
     printw("Enter the mass of the black hole in kilograms:\n");
     scanw("%lf", &masse);
     time = 5120 * PI * (pow(G, 2) / (pow(c, 4) * h)) * pow(masse, 3);
-    printw("The black hole will be evaporated in %lf seconds\n", time);
+    printw("The black hole will be evaporated in %lld seconds\n", time);
+    getch();
+    refresh();
 }
 
 void Functions::calculateEnergy() {
@@ -88,6 +104,8 @@ void Functions::calculateEnergy() {
     scanw("%lf %lf", &radius, &k);
     energy = 4 * PI * pow(radius, 2) * sigma * pow(k, 4);
     printw("The black hole emits %lf W\n", energy);
+    getch();
+    refresh();
 }
 
 Functions::FunctionPtr* Functions::getFunctionArray() {

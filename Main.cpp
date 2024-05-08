@@ -18,6 +18,13 @@ void printButton(const char *label, bool selected) {
     printw("  ");
 }
 
+void displayResult(const char* result) {
+    mvprintw(10, 0, "Result: %s", result);
+    printw("\nPress any key to continue...");
+    refresh();
+    getch();
+}
+
 int main() {
     initscr();
     cbreak();
@@ -28,6 +35,8 @@ int main() {
     const char* options[] = {"Mass", "Temperature", "Radius", "Area", "Surface Gravity", "Time", "Energy"};
     int choice = 0;
     int ch;
+    char inputBuffer[100];
+    char resultBuffer[100];
     while (ch != 'q') {
         clear();
         printw("What do you want to calculate?\n");
@@ -46,7 +55,39 @@ int main() {
                     choice = (choice + 1) % (sizeof(options) / sizeof(options[0]));
                     break;
                 case '\n':
-                    (functionsObj.*(functionsObj.getFunctionArray()[choice]))();
+                    clear();
+                    refresh();
+                    switch (choice) {
+                        case 0:
+                            functionsObj.calculateMass();
+                            sprintf(resultBuffer, "Mass calculation completed.");
+                            continue;
+                        case 1:
+                            functionsObj.calculateTemp();
+                            sprintf(resultBuffer, "Temperature calculation completed.");
+                            continue;
+                        case 2:
+                            functionsObj.calculateRadius();
+                            sprintf(resultBuffer, "Radius calculation completed.");
+                            continue;
+                        case 3:
+                            functionsObj.calculateArea();
+                            sprintf(resultBuffer, "Area calculation completed.");
+                            continue;
+                        case 4:
+                            functionsObj.calculateSurfaceGravity();
+                            sprintf(resultBuffer, "Surface Gravity calculation completed.");
+                            continue;
+                        case 5:
+                            functionsObj.calculateTime();
+                            sprintf(resultBuffer, "Time calculation completed.");
+                            continue;
+                        case 6:
+                            functionsObj.calculateEnergy();
+                            sprintf(resultBuffer, "Energy calculation completed.");
+                            continue;
+                    }
+                    displayResult(resultBuffer);
                     choice = -1;
                     break;
             }
