@@ -59,10 +59,11 @@ void Functions::calculateTemp() {
 }
 
 void Functions::calculateRadius() {
+    int a = 0;
     double masse = 0, radius = 0;
     printw("Enter the mass of the black hole in kilograms:\n");
     scanw("%lf", &masse);
-    radius = (2 * G * masse) / pow(c, 2);
+    radius = (2 * G * masse) / c;
     printw("Radius of the black hole in meters: %lf m\n", radius);
     getch();
     refresh();
@@ -72,8 +73,8 @@ void Functions::calculateArea() {
     double area = 0, masse = 0;
     printw("Enter the mass of the black hole in kilograms:\n");
     scanw("%lf", &masse);
-    area = (16 * PI * pow(G, 2) * pow(masse, 2)) / pow(c, 4);
-    printw("Area of the black hole in meters: %lf m\n", area);
+    area = 4 * PI * pow(((1.5 * G * masse) / pow(c, 2)), 2);
+    printw("Area of the black hole in meters: %lld m\n", area);
     getch();
     refresh();
 }
@@ -83,7 +84,7 @@ void Functions::calculateSurfaceGravity() {
     printw("Enter the mass of the black hole in kilograms and the radius in meters:\n");
     scanw("%lf %lf", &m, &radius);
     k = (G * m) / pow(radius, 2);
-    printw("The Surface gravity of the black hole is %lld m/s²\n", k);
+    printw("The Surface gravity of the black hole is %lld G\n", k);
     getch();
     refresh();
 }
